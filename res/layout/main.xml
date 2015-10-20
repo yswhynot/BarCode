@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp" />
-    <!--
+
       <ImageView
           android:id="@+id/iv_bar_image"
           android:layout_width="wrap_content"
@@ -66,5 +66,5 @@
              android:layout_marginTop="10dp"
           android:layout_gravity="center"/>
 
-      -->
+
 </LinearLayout>

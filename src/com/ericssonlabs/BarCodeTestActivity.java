@@ -18,6 +18,9 @@ import com.google.zxing.WriterException;
 import com.zxing.activity.CaptureActivity;
 import com.zxing.encoding.EncodingHandler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BarCodeTestActivity extends Activity {
     /**
      * Called when the activity is first created.
@@ -27,6 +30,7 @@ public class BarCodeTestActivity extends Activity {
     private ImageView qrImgImageView;
     private boolean isQRCode = false;
     private Bitmap bitmapForEditing;
+    private static final Map<String, String> itemInfoList = new HashMap<String, String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,8 @@ public class BarCodeTestActivity extends Activity {
                 startActivity(editQRCodeIntent);
             }
         });
+
+        itemInit();
     }
 
     @Override
@@ -121,6 +127,7 @@ public class BarCodeTestActivity extends Activity {
         if (resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
+            scanResult = getItemInfo(scanResult);
             resultTextView.setText(scanResult);
         }
     }
@@ -132,5 +139,22 @@ public class BarCodeTestActivity extends Activity {
             }
         }
         return true;
+    }
+
+    /**
+     * initialize item list
+     */
+    private void itemInit() {
+        // add bar code here
+        itemInfoList.put("9787121102073", "Name: Book, Bar Code: 9787121102073, Price: 12.5 HKD");
+    }
+
+    /**
+     * Return item information from scanned result
+     */
+    public String getItemInfo(String scanResult) {
+        String itemInfo = scanResult;
+        itemInfo = itemInfoList.get(scanResult);
+        return itemInfo;
     }
 }
