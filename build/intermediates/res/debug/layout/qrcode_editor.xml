@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/qrcode_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/qr_edit_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/logo_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.ericssonlabs.StrokeTextView
+            android:id="@+id/logo_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/add_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_weight="3"
+        android:text="Add Logo" />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="Input the text" />
+
+        <Button
+            android:id="@+id/add_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add Text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/clean_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Clean Logo" />
+
+        <Button
+            android:id="@+id/clean_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Clean Text" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save_code"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+
+</LinearLayout><!-- From: file:/C:/Users/v-shayi/android/POS/BarCodeTest/res/layout/qrcode_editor.xml -->
