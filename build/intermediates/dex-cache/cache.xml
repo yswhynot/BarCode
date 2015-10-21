@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\v-shayi\android\POS\BarCodeTest\libs\zxing.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
-        <dex dex="C:\Users\v-shayi\android\POS\BarCodeTest\build\intermediates\pre-dexed\debug\zxing-611b19e934b464182cfd809c9e175883a23bc623.jar" />
-    </item>
-    <item
         jar="C:\Users\v-shayi\android\POS\BarCodeTest\libs\nineoldandroids-2.4.0.jar"
         jumboMode="false"
         revision="23.0.0"
@@ -21,6 +14,13 @@
         revision="23.0.0"
         sha1="48c94ae70fa65718b382098237806a5909bb096e">
         <dex dex="C:\Users\v-shayi\android\POS\BarCodeTest\build\intermediates\pre-dexed\debug\android-support-v4-a3474234580acc8280711f4e66da1aeb7ed05fb4.jar" />
+    </item>
+    <item
+        jar="C:\Users\v-shayi\android\POS\BarCodeTest\libs\zxing.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
+        <dex dex="C:\Users\v-shayi\android\POS\BarCodeTest\build\intermediates\pre-dexed\debug\zxing-611b19e934b464182cfd809c9e175883a23bc623.jar" />
     </item>
 
 </items>

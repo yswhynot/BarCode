@@ -26,8 +26,8 @@ public class BarCodeTestActivity extends Activity {
      * Called when the activity is first created.
      */
     private TextView resultTextView;
-    private EditText qrStrEditText;
-    private ImageView qrImgImageView;
+//    private EditText qrStrEditText;
+//    private ImageView qrImgImageView;
     private boolean isQRCode = false;
     private Bitmap bitmapForEditing;
     private static final Map<String, String> itemInfoList = new HashMap<String, String>();
@@ -38,8 +38,9 @@ public class BarCodeTestActivity extends Activity {
         setContentView(R.layout.main);
 
         resultTextView = (TextView) this.findViewById(R.id.tv_scan_result);
-        qrStrEditText = (EditText) this.findViewById(R.id.et_qr_string);
-        qrImgImageView = (ImageView) this.findViewById(R.id.iv_qr_image);
+        resultTextView.setText("");
+//        qrStrEditText = (EditText) this.findViewById(R.id.et_qr_string);
+//        qrImgImageView = (ImageView) this.findViewById(R.id.iv_qr_image);
 
 
         Button scanBarCodeButton = (Button) this.findViewById(R.id.btn_scan_barcode);
@@ -55,68 +56,68 @@ public class BarCodeTestActivity extends Activity {
 /**
  * 生成二维码      
  */
-        Button generateQRCodeButton = (Button) this.findViewById(R.id.btn_add_qrcode);
-        generateQRCodeButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                try {
-                    String contentString = qrStrEditText.getText().toString();
-                    if (!contentString.equals("")) {
-                        Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, 300);
-                        qrImgImageView.setImageBitmap(qrCodeBitmap);
-                        bitmapForEditing = qrCodeBitmap;
-                        InputMethodManager imm = (InputMethodManager) getSystemService(BarCodeTestActivity.this.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-                        isQRCode = true;
-                    } else {
-                        Toast.makeText(BarCodeTestActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (WriterException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        });
+//        Button generateQRCodeButton = (Button) this.findViewById(R.id.btn_add_qrcode);
+//        generateQRCodeButton.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                try {
+////                    String contentString = qrStrEditText.getText().toString();
+//                    if (!contentString.equals("")) {
+//                        Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, 300);
+//                        qrImgImageView.setImageBitmap(qrCodeBitmap);
+//                        bitmapForEditing = qrCodeBitmap;
+//                        InputMethodManager imm = (InputMethodManager) getSystemService(BarCodeTestActivity.this.INPUT_METHOD_SERVICE);
+//                        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+//                        isQRCode = true;
+//                    } else {
+//                        Toast.makeText(BarCodeTestActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                } catch (WriterException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
         /**
          * 生成条形码
          */
-        Button generateBarCodeButton = (Button) this.findViewById(R.id.btn_add_barcode);
-        generateBarCodeButton.setOnClickListener(new OnClickListener() {
+//        Button generateBarCodeButton = (Button) this.findViewById(R.id.btn_add_barcode);
+//        generateBarCodeButton.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                String contentString = qrStrEditText.getText().toString();
+//                if (!contentString.equals("")) {
+//                    if (isNumeric(contentString)) {
+//
+//                        Bitmap barCodeBitmap = EncodingHandler.creatBarCode(BarCodeTestActivity.this, contentString, 1000, 300, true);
+//                        qrImgImageView.setImageBitmap(barCodeBitmap);
+//                        InputMethodManager imm = (InputMethodManager) getSystemService(BarCodeTestActivity.this.INPUT_METHOD_SERVICE);
+//                        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+//                        isQRCode = false;
+//                    } else {
+//                        Toast.makeText(BarCodeTestActivity.this, "Text must be a string of number", Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    Toast.makeText(BarCodeTestActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
-            @Override
-            public void onClick(View v) {
-                String contentString = qrStrEditText.getText().toString();
-                if (!contentString.equals("")) {
-                    if (isNumeric(contentString)) {
-
-                        Bitmap barCodeBitmap = EncodingHandler.creatBarCode(BarCodeTestActivity.this, contentString, 1000, 300, true);
-                        qrImgImageView.setImageBitmap(barCodeBitmap);
-                        InputMethodManager imm = (InputMethodManager) getSystemService(BarCodeTestActivity.this.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-                        isQRCode = false;
-                    } else {
-                        Toast.makeText(BarCodeTestActivity.this, "Text must be a string of number", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(BarCodeTestActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        qrImgImageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                if (!isQRCode)
-                    return;
-                Log.d("qrcode", "click");
-                Intent editQRCodeIntent = new Intent(BarCodeTestActivity.this, QRCodeEditActivity.class);
-                editQRCodeIntent.putExtra("QRCode", bitmapForEditing);
-                startActivity(editQRCodeIntent);
-            }
-        });
+//        qrImgImageView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//                // TODO Auto-generated method stub
+//                if (!isQRCode)
+//                    return;
+//                Log.d("qrcode", "click");
+//                Intent editQRCodeIntent = new Intent(BarCodeTestActivity.this, QRCodeEditActivity.class);
+//                editQRCodeIntent.putExtra("QRCode", bitmapForEditing);
+//                startActivity(editQRCodeIntent);
+//            }
+//        });
 
         itemInit();
     }
@@ -128,7 +129,8 @@ public class BarCodeTestActivity extends Activity {
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
             scanResult = getItemInfo(scanResult);
-            resultTextView.setText(scanResult);
+            resultTextView.append(scanResult + "\n\n");
+//            resultTextView.setText(scanResult + "\n");
         }
     }
 
@@ -147,14 +149,18 @@ public class BarCodeTestActivity extends Activity {
     private void itemInit() {
         // add bar code here
         itemInfoList.put("9787121102073", "Name: Book, Bar Code: 9787121102073, Price: 12.5 HKD");
+        itemInfoList.put("9771234567003", "Name: QAZWSX, Bar Code: 9771234567003, Price: 0.01 HKD");
+        itemInfoList.put("1234567890128", "Name: EDCRFV, Bar Code: 1234567890128, Price: 1234.5 HKD");
     }
 
     /**
      * Return item information from scanned result
      */
     public String getItemInfo(String scanResult) {
-        String itemInfo = scanResult;
+        String itemInfo = "";
         itemInfo = itemInfoList.get(scanResult);
+        if (itemInfo == null)
+            itemInfo = scanResult;
         return itemInfo;
     }
 }

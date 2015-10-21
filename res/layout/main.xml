@@ -16,12 +16,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scan result："
+            android:text="Scan result：\r\n"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
@@ -33,38 +33,45 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/et_qr_string"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="Input the text" />
-
     <Button
-        android:id="@+id/btn_add_qrcode"
+        android:id="@+id/btn_proceed"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Generate QRcode" />
+        android:layout_marginBottom="30dp"
+        android:text="Proceed to payment" />
 
-    <Button
-        android:id="@+id/btn_add_barcode"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Generate Barcode" />
+    <!--<EditText-->
+        <!--android:id="@+id/et_qr_string"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:hint="Input the text" />-->
 
-    <ImageView
-        android:id="@+id/iv_qr_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp" />
+    <!--<Button-->
+        <!--android:id="@+id/btn_add_qrcode"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Generate QRcode" />-->
 
-      <ImageView
-          android:id="@+id/iv_bar_image"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-             android:layout_marginTop="10dp"
-          android:layout_gravity="center"/>
+    <!--<Button-->
+        <!--android:id="@+id/btn_add_barcode"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Generate Barcode" />-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_qr_image"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="10dp" />-->
+
+      <!--<ImageView-->
+          <!--android:id="@+id/iv_bar_image"-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+             <!--android:layout_marginTop="10dp"-->
+          <!--android:layout_gravity="center"/>-->
 
 
 </LinearLayout>
