@@ -3,6 +3,7 @@ package com.ericssonlabs;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,13 +11,19 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.SmartPOS.ProductDetailPage;
 import com.google.zxing.WriterException;
 import com.zxing.activity.CaptureActivity;
 import com.zxing.encoding.EncodingHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,9 +32,8 @@ public class BarCodeTestActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    private TextView resultTextView;
-//    private EditText qrStrEditText;
-//    private ImageView qrImgImageView;
+    //    private EditText qrStrEditText;
+    //    private ImageView qrImgImageView;
     private boolean isQRCode = false;
     private Bitmap bitmapForEditing;
     private static final Map<String, String> itemInfoList = new HashMap<String, String>();
@@ -37,8 +43,7 @@ public class BarCodeTestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        resultTextView = (TextView) this.findViewById(R.id.tv_scan_result);
-        resultTextView.setText("");
+        //resultTextView.setText("");
 //        qrStrEditText = (EditText) this.findViewById(R.id.et_qr_string);
 //        qrImgImageView = (ImageView) this.findViewById(R.id.iv_qr_image);
 
@@ -53,6 +58,8 @@ public class BarCodeTestActivity extends Activity {
             }
         });
 
+        itemInit();
+    }
 /**
  * 生成二维码      
  */
@@ -119,8 +126,7 @@ public class BarCodeTestActivity extends Activity {
 //            }
 //        });
 
-        itemInit();
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -129,19 +135,21 @@ public class BarCodeTestActivity extends Activity {
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
             scanResult = getItemInfo(scanResult);
-            resultTextView.append(scanResult + "\n\n");
+            SetResultView(scanResult);
+
+//            resultTextView.append(scanResult + "\n\n");
 //            resultTextView.setText(scanResult + "\n");
         }
     }
 
-    public boolean isNumeric(String str) {
+    /*public boolean isNumeric(String str) {
         for (int i = str.length(); --i >= 0; ) {
             if (!Character.isDigit(str.charAt(i))) {
                 return false;
             }
         }
         return true;
-    }
+    }*/
 
     /**
      * initialize item list
@@ -150,7 +158,8 @@ public class BarCodeTestActivity extends Activity {
         // add bar code here
         itemInfoList.put("9787121102073", "Name: Book, Bar Code: 9787121102073, Price: 12.5 HKD");
         itemInfoList.put("9771234567003", "Name: QAZWSX, Bar Code: 9771234567003, Price: 0.01 HKD");
-        itemInfoList.put("1234567890128", "Name: EDCRFV, Bar Code: 1234567890128, Price: 1234.5 HKD");
+        itemInfoList.put("4890008123308", "{\"Name\":Fanta,\"Price\":6HKD}");
+        itemInfoList.put("4890008400300", "{\"Name\":CreamSoda,\"Price\":6HKD}");
     }
 
     /**
@@ -162,5 +171,47 @@ public class BarCodeTestActivity extends Activity {
         if (itemInfo == null)
             itemInfo = scanResult;
         return itemInfo;
+    }
+
+    public void SetResultView(String resultString) {
+        JSONObject productDetail = null;
+        String productNameString="";
+        String productPriceString="";
+        GridLayout productContainer = (GridLayout) this.findViewById(R.id.gv_product);
+        GridLayout.LayoutParams productNamePram;
+        GridLayout.LayoutParams productPricePram;
+        TextView productName = new TextView(BarCodeTestActivity.this);
+        TextView productPrice = new TextView(BarCodeTestActivity.this);
+        try {
+            productDetail = new JSONObject(resultString);
+            productNameString = productDetail.getString("Name")+"\n";
+            productPriceString = productDetail.getString("Price")+"\n";
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        productNamePram = new GridLayout.LayoutParams(GridLayout.spec(0),GridLayout.spec(0));
+        productName.setText(productNameString);
+        productName.setWidth(800);
+        productName.setTextColor(Color.parseColor("#000000"));
+        productName.setTextSize(18);
+        productName.setLayoutParams(productNamePram);
+
+        productPricePram = new GridLayout.LayoutParams(GridLayout.spec(0),GridLayout.spec(1));
+        productPrice.setText(productPriceString);
+        productPrice.setTextColor(Color.parseColor("#000000"));
+        productPrice.setTextSize(18);
+        productPrice.setLayoutParams(productPricePram);
+
+        productContainer.addView(productName);
+        productContainer.addView(productPrice);
+
+        productName.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent openProductDetailIntent = new Intent(BarCodeTestActivity.this, ProductDetailPage.class);
+                startActivity(openProductDetailIntent);
+            }
+        });
     }
 }

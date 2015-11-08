@@ -1,44 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_scan_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_alignLeft="@+id/btn_scan_barcode"
+        android:layout_alignParentTop="true" />
+
+
+
+    <TextView
+        android:id="@+id/tv_scan_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_price"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/tv_scan_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btn_pay" />
+
+<GridLayout android:id="@+id/gv_product"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_scan_name"
+        android:rowCount="2">
+
+    <!--TextView android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_column="0"
+        android:text="Fanta"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_column="1"
+        android:text="6 HKD"
+        android:textSize="18sp"
+        android:textColor="@color/black"/!-->
+</GridLayout>
 
     <Button
         android:id="@+id/btn_scan_barcode"
-        android:layout_width="fill_parent"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Open camera" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scan result：\r\n"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_scan_result"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </LinearLayout>
-
+        android:layout_gravity="left"
+        android:text="@string/button_scan"
+        android:layout_below="@+id/gv_product"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp" />
     <Button
-        android:id="@+id/btn_proceed"
-        android:layout_width="fill_parent"
+        android:id="@+id/btn_pay"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Proceed to payment" />
+        android:text="@string/button_buy"
+        android:layout_alignTop="@+id/btn_scan_barcode"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
 
     <!--<EditText-->
         <!--android:id="@+id/et_qr_string"-->
@@ -74,4 +103,4 @@
           <!--android:layout_gravity="center"/>-->
 
 
-</LinearLayout>
+</RelativeLayout>
