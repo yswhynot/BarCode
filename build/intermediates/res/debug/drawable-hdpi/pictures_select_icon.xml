@@ -2,4 +2,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/friends_sends_pictures_select_icon_selected" android:state_checked="true"></item>
     <item android:drawable="@drawable/friends_sends_pictures_select_icon_unselected" android:state_checked="false"></item>
-</selector><!-- From: file:/C:/Users/james/Desktop/BarCode/res/drawable-hdpi/pictures_select_icon.xml -->
+</selector><!-- From: file:/C:/Users/v-shayi/android/POS/BarCode/res/drawable-hdpi/pictures_select_icon.xml -->

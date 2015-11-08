@@ -6,4 +6,4 @@
             android:startColor="@color/background_gradient_start"
             android:endColor="@color/background_gradient_end"
             android:angle="-270" />
-</shape><!-- From: file:/C:/Users/james/Desktop/BarCode/res/drawable-hdpi/default_background.xml -->
+</shape><!-- From: file:/C:/Users/v-shayi/android/POS/BarCode/res/drawable-hdpi/default_background.xml -->

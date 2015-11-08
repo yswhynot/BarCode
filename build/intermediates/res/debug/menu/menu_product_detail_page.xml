@@ -3,4 +3,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />
 </menu>
-<!-- From: file:/C:/Users/james/Desktop/BarCode/res/menu/menu_product_detail_page.xml -->
+<!-- From: file:/C:/Users/v-shayi/android/POS/BarCode/res/menu/menu_product_detail_page.xml -->

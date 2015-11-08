@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/james/Desktop/BarCode/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/v-shayi/android/POS/BarCode/res/values/colors.xml -->
     <eat-comment/>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="background_gradient_start">#000000</color>
@@ -56,11 +56,11 @@
     <color name="white">#FFFFFF</color>
     <color name="yello">#F8F8FF00</color>
     <color name="yellow">#ffffff00</color>
-    <!-- From: file:/C:/Users/james/Desktop/BarCode/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/v-shayi/android/POS/BarCode/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Users/james/Desktop/BarCode/res/values/ids.xml -->
+    <!-- From: file:/C:/Users/v-shayi/android/POS/BarCode/res/values/ids.xml -->
     <eat-comment/>
     <item name="auto_focus" type="id"/>
     <item name="decode" type="id"/>
@@ -74,7 +74,7 @@
     <item name="return_scan_result" type="id"/>
     <item name="search_book_contents_failed" type="id"/>
     <item name="search_book_contents_succeeded" type="id"/>
-    <!-- From: file:/C:/Users/james/Desktop/BarCode/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/v-shayi/android/POS/BarCode/res/values/strings.xml -->
     <eat-comment/>
     <string name="about_app">About DemoCast Player</string>
     <string name="action_settings">Settings</string>
