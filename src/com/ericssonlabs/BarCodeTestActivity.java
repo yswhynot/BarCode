@@ -1,30 +1,28 @@
 package com.ericssonlabs;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.SmartPOS.ProductDetailPage;
-import com.google.zxing.WriterException;
 import com.zxing.activity.CaptureActivity;
-import com.zxing.encoding.EncodingHandler;
+import com.SmartPOS.Item;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,12 +34,59 @@ public class BarCodeTestActivity extends Activity {
     //    private ImageView qrImgImageView;
     private boolean isQRCode = false;
     private Bitmap bitmapForEditing;
-    private static final Map<String, String> itemInfoList = new HashMap<String, String>();
+    private static final Map<String, Item> itemInfoList = new HashMap<String, Item>();
+
+    private ArrayList<Item> itemList;
+    private ItemsAdapter adapter;
+
+    public class ItemsAdapter extends ArrayAdapter<Item> {
+        public ItemsAdapter(Context context, ArrayList<Item> items) {
+            super(context, 0, items);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // Get the data item for this position
+            Item item = getItem(position);
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_layout, parent, false);
+            }
+            // Lookup view for data population
+            TextView itemName = (TextView) convertView.findViewById(R.id.itemName);
+            TextView itemPrice = (TextView) convertView.findViewById(R.id.itemPrice);
+            // Populate the data into the template view using the data object
+            itemName.setText(item.itemName);
+            itemPrice.setText(item.itemPrice);
+            // Return the completed view to render on screen
+            return convertView;
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        itemList = new ArrayList<Item>();
+        final ListView listView = (ListView) findViewById(R.id.list);
+        adapter = new ItemsAdapter(this, itemList);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // ListView Clicked item index
+                int itemPosition = position;
+                // ListView Clicked item value
+                Item itemValue = (Item)listView.getItemAtPosition(position);
+                // Show Alert
+//                Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue.toString(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getBaseContext(), ProductDetailPage.class);
+                intent.putExtra("item", itemValue);
+                startActivity(intent);
+            }
+        });
 
         //resultTextView.setText("");
 //        qrStrEditText = (EditText) this.findViewById(R.id.et_qr_string);
@@ -60,73 +105,6 @@ public class BarCodeTestActivity extends Activity {
 
         itemInit();
     }
-/**
- * 生成二维码      
- */
-//        Button generateQRCodeButton = (Button) this.findViewById(R.id.btn_add_qrcode);
-//        generateQRCodeButton.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                try {
-////                    String contentString = qrStrEditText.getText().toString();
-//                    if (!contentString.equals("")) {
-//                        Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, 300);
-//                        qrImgImageView.setImageBitmap(qrCodeBitmap);
-//                        bitmapForEditing = qrCodeBitmap;
-//                        InputMethodManager imm = (InputMethodManager) getSystemService(BarCodeTestActivity.this.INPUT_METHOD_SERVICE);
-//                        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-//                        isQRCode = true;
-//                    } else {
-//                        Toast.makeText(BarCodeTestActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                } catch (WriterException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-        /**
-         * 生成条形码
-         */
-//        Button generateBarCodeButton = (Button) this.findViewById(R.id.btn_add_barcode);
-//        generateBarCodeButton.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                String contentString = qrStrEditText.getText().toString();
-//                if (!contentString.equals("")) {
-//                    if (isNumeric(contentString)) {
-//
-//                        Bitmap barCodeBitmap = EncodingHandler.creatBarCode(BarCodeTestActivity.this, contentString, 1000, 300, true);
-//                        qrImgImageView.setImageBitmap(barCodeBitmap);
-//                        InputMethodManager imm = (InputMethodManager) getSystemService(BarCodeTestActivity.this.INPUT_METHOD_SERVICE);
-//                        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-//                        isQRCode = false;
-//                    } else {
-//                        Toast.makeText(BarCodeTestActivity.this, "Text must be a string of number", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    Toast.makeText(BarCodeTestActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-//        qrImgImageView.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//                // TODO Auto-generated method stub
-//                if (!isQRCode)
-//                    return;
-//                Log.d("qrcode", "click");
-//                Intent editQRCodeIntent = new Intent(BarCodeTestActivity.this, QRCodeEditActivity.class);
-//                editQRCodeIntent.putExtra("QRCode", bitmapForEditing);
-//                startActivity(editQRCodeIntent);
-//            }
-//        });
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -134,8 +112,8 @@ public class BarCodeTestActivity extends Activity {
         if (resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
-            scanResult = getItemInfo(scanResult);
-            SetResultView(scanResult);
+            Item itemScan = getItemInfo(scanResult);
+            SetResultView(itemScan);
 
 //            resultTextView.append(scanResult + "\n\n");
 //            resultTextView.setText(scanResult + "\n");
@@ -156,62 +134,24 @@ public class BarCodeTestActivity extends Activity {
      */
     private void itemInit() {
         // add bar code here
-        itemInfoList.put("9787121102073", "Name: Book, Bar Code: 9787121102073, Price: 12.5 HKD");
-        itemInfoList.put("9771234567003", "Name: QAZWSX, Bar Code: 9771234567003, Price: 0.01 HKD");
-        itemInfoList.put("4890008123308", "{\"Name\":Fanta,\"Price\":6HKD}");
-        itemInfoList.put("4890008400300", "{\"Name\":CreamSoda,\"Price\":6HKD}");
+        itemInfoList.put("9787121102073", new Item("Book", "12.5 HKD", 1));
+        itemInfoList.put("9771234567003", new Item("qazQAZ", "0.01 HKD", 2));
+        itemInfoList.put("4890008123308", new Item("Fanta", "6 HKD", 3));
+        itemInfoList.put("4890008400300", new Item("CreamSoda", "6 HKD", 4));
     }
 
     /**
      * Return item information from scanned result
      */
-    public String getItemInfo(String scanResult) {
-        String itemInfo = "";
-        itemInfo = itemInfoList.get(scanResult);
+    public Item getItemInfo(String scanResult) {
+        Item itemInfo = itemInfoList.get(scanResult);
         if (itemInfo == null)
-            itemInfo = scanResult;
+            itemInfo = new Item("Not exist", "", 0);
         return itemInfo;
     }
 
-    public void SetResultView(String resultString) {
-        JSONObject productDetail = null;
-        String productNameString="";
-        String productPriceString="";
-        GridLayout productContainer = (GridLayout) this.findViewById(R.id.gv_product);
-        GridLayout.LayoutParams productNamePram;
-        GridLayout.LayoutParams productPricePram;
-        TextView productName = new TextView(BarCodeTestActivity.this);
-        TextView productPrice = new TextView(BarCodeTestActivity.this);
-        try {
-            productDetail = new JSONObject(resultString);
-            productNameString = productDetail.getString("Name")+"\n";
-            productPriceString = productDetail.getString("Price")+"\n";
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        productNamePram = new GridLayout.LayoutParams(GridLayout.spec(0),GridLayout.spec(0));
-        productName.setText(productNameString);
-        productName.setWidth(800);
-        productName.setTextColor(Color.parseColor("#000000"));
-        productName.setTextSize(18);
-        productName.setLayoutParams(productNamePram);
-
-        productPricePram = new GridLayout.LayoutParams(GridLayout.spec(0),GridLayout.spec(1));
-        productPrice.setText(productPriceString);
-        productPrice.setTextColor(Color.parseColor("#000000"));
-        productPrice.setTextSize(18);
-        productPrice.setLayoutParams(productPricePram);
-
-        productContainer.addView(productName);
-        productContainer.addView(productPrice);
-
-        productName.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent openProductDetailIntent = new Intent(BarCodeTestActivity.this, ProductDetailPage.class);
-                startActivity(openProductDetailIntent);
-            }
-        });
+    public void SetResultView(Item itemScan) {
+        itemList.add(itemScan);
+        adapter.notifyDataSetChanged();
     }
 }
